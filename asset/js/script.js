@@ -8,6 +8,8 @@
     //weather icon
     //humidity 
 
+    // two different keys for different  functions
+
 
     const yourKey = "15230fb51b42832a4b1f952cfbe1c3d1";
     const queryUrl = ""
