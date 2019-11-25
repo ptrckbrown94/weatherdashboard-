@@ -10,13 +10,20 @@
 
     // two different keys for different  functions
 
-
+    let cityName =  document.getElementById("")
     const yourKey = "15230fb51b42832a4b1f952cfbe1c3d1";
-    const queryUrl = ""
+    const queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + yourKey;
+   console.log(queryUrl)
 
-    axio.get()
+    axios.get(queryUrl)
     .then(function(response){
         // the retrieved data
-
+     const weatherIcon = response.data.icon;   
+     const tempature = response.data.main.temp;
+     const humidity = response.data.main.humidity;
+     const windSpeed = response.data.wind.spead;    
+     const cityName = response.data.name;
+     const longitude = resposne.data.coord.lon;
+     const latitude = response.data.coord.lat;
 
     }); 
