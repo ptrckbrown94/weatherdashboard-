@@ -9,6 +9,9 @@
     //humidity 
 
 
+    const yourKey = "15230fb51b42832a4b1f952cfbe1c3d1";
+    const queryUrl = ""
+
     axio.get()
     .then(function(response){
         // the retrieved data
