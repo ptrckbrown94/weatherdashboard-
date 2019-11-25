@@ -9,4 +9,9 @@
     //humidity 
 
 
-    
+    axio.get()
+    .then(function(response){
+        // the retrieved data
+
+
+    }); 
