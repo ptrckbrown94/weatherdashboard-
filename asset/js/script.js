@@ -30,7 +30,7 @@ searchbuttonEl.addEventListener("click", function () {
 
     const yourKey = "15230fb51b42832a4b1f952cfbe1c3d1";
 
-    const queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchCityName + "&appid=" + yourKey;
+    const queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchCityName + "&units=imperial&appid=" + yourKey;
     console.log(queryUrl)
 
     axios.get(queryUrl)
@@ -41,27 +41,27 @@ searchbuttonEl.addEventListener("click", function () {
             const humidity = response.data.main.humidity;
             const windSpeed = response.data.wind.speed;
             const cityName = response.data.name;
-            const longitude = response.data.coord[0];
-            const latitude = response.data.coord[1];
+            const longitude = response.data.coord.lon;
+            const latitude = response.data.coord.lat;
             let currentDate = moment().format('LL');
-           console.log(response);
-            const uvQueryUrl = "http://api.openweathermap.org/data/2.5/uvi/forecast?appid=" + yourKey + "&lat=" + latitude + "&lon=" + longitude + "&cnt={cnt}"
-
+            console.log(response);
+            const uvQueryUrl = "http://api.openweathermap.org/data/2.5/uvi/forecast?appid=" + yourKey + "&lat=" + latitude + "&lon=" + longitude + "&cnt=0"
+            console.log(uvQueryUrl)
 
             axios.get(uvQueryUrl)
                 .then(function (response) {
+                    console.log(response);
+                    const uvIndex = response.data[0].value;
 
 
+
+                    // using the above results and generate div with col and row to show current days forcast
+                    document.querySelector(".city").innerHTML = cityName + " " + currentDate + "<img src = 'http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png'></img>";
+                    document.querySelector(".temp").innerText = "Tempature (F): " + tempature;
+                    document.querySelector(".humid").innerText = "Humidity: " + humidity + "%";
+                    document.querySelector(".wind").innerText = "Wind Speed: " + windSpeed;
+                    document.querySelector(".UV").innerText = "UV Index: " + uvIndex;
                 });
-            console.log(response);
-
-            // using the above results and generate div with col and row to show current days forcast
-            document.querySelector(".city").innerHTML = cityName + " " + currentDate + "<img src = 'http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png'></img>";
-            document.querySelector(".temp").innerText = "Tempature (F): " + tempature;
-            document.querySelector(".humid").innerText = "Humidity: " + humidity + "%";
-            document.querySelector(".wind").innerText = "Wind Speed: " + windSpeed;
-            document.querySelector(".UV").innerText = "UV Index: ";
-
 
         });
 
