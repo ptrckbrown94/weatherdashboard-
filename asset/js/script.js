@@ -48,6 +48,7 @@ searchbuttonEl.addEventListener("click", function () {
             const uvQueryUrl = "http://api.openweathermap.org/data/2.5/uvi/forecast?appid=" + yourKey + "&lat=" + latitude + "&lon=" + longitude + "&cnt=0"
             console.log(uvQueryUrl)
 
+            // I had to put this function within the other function because I could not retrieve uvIndex variable
             axios.get(uvQueryUrl)
                 .then(function (response) {
                     console.log(response);
@@ -85,3 +86,10 @@ function Get1DayForcastDiv(cityNameString, dayNumber) {
     return blueRootDiv;
 
 }
+ 
+const fiveDayQueryUrl = 
+axios.get(fiveDayQueryUrl)
+                .then(function (response){
+
+                    
+                });
