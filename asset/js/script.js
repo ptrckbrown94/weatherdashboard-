@@ -1,18 +1,19 @@
 // Pseudo Code
 // get user imput City
 // imput should save history
-    //save 5 cities in history in local storage
-    // key using an index 0-4 (5 cities)
-        // index 0-4 is the key and city is value
-     //   const toDoData = localStorage.getItem(i);     
-    // localStorage.setItem(index, JSON.stringify(noteArray[index]));
+//save 5 cities in history in local storage
+// key using an index 0-4 (5 cities)
+// index 0-4 is the key and city is value
+//   const toDoData = localStorage.getItem(i);     
+// localStorage.setItem(index, JSON.stringify(noteArray[index]));
 
 // display City, date, icon for weather, temp, Humidity, Wind speed, UV index
+// Hint: To convert from Kelvin to Fahrenheit: F = (K - 273.15) * 1.80 + 32
 // 5 day  forcast 
-    // date
-    // temp
-    //weather icon
-    //humidity 
+//date
+//temp
+//weather icon
+//humidity 
 
 // two different keys for different  functions
 
@@ -37,26 +38,33 @@ searchbuttonEl.addEventListener("click", function () {
             const weatherIcon = response.data.icon;
             const tempature = response.data.main.temp;
             const humidity = response.data.main.humidity;
-            const windSpeed = response.data.wind.spead;
+            const windSpeed = response.data.wind.speed;
             const cityName = response.data.name;
             const longitude = response.data.coord.lon;
             const latitude = response.data.coord.lat;
+
+
+            // using the above results and generate div with col and row to show current days forcast
+           // document.querySelector(".city").innerText = cityName;
+            document.querySelector(".temp").innerText = "Tempature (F):" + tempature;
+            document.querySelector(".humid").innerText = "Humidity:" + humidity + "%";
+            document.querySelector(".wind").innerText = "Wind Speed:" + windSpeed;
+
         });
 
-        // using the above results and generate div with col and row to show current days forcast
 
-        //now generate 5 day forcast
-        for( i=0; i < 5; i++){
-            let blueCardDiv = Get1DayForcastDiv(searchCityName, i)
-            
-        }
+    //now generate 5 day forcast
+    for (i = 0; i < 5; i++) {
+        let blueCardDiv = Get1DayForcastDiv(searchCityName, i);
+
+    }
 
 
-    
+
 
 });
 
-function Get1DayForcastDiv(cityNameString, dayNumber){
+function Get1DayForcastDiv(cityNameString, dayNumber) {
     //make api call https://openweathermap.org/forecast5
     const blueRootDiv = document.createElement("div");
     //blueRootDiv.appendChild
