@@ -35,20 +35,21 @@ searchbuttonEl.addEventListener("click", function () {
     axios.get(queryUrl)
         .then(function (response) {
             // the retrieved data needed
-            const weatherIcon = response.data.icon;
+            const weatherIcon = response.data.weather[0].icon;
             const tempature = response.data.main.temp;
             const humidity = response.data.main.humidity;
             const windSpeed = response.data.wind.speed;
             const cityName = response.data.name;
             const longitude = response.data.coord.lon;
             const latitude = response.data.coord.lat;
+            console.log(response);
 
 
             // using the above results and generate div with col and row to show current days forcast
-           // document.querySelector(".city").innerText = cityName;
-            document.querySelector(".temp").innerText = "Tempature (F):" + tempature;
-            document.querySelector(".humid").innerText = "Humidity:" + humidity + "%";
-            document.querySelector(".wind").innerText = "Wind Speed:" + windSpeed;
+            document.querySelector(".city").innerHTML = cityName +  " placeholder " + "<img src = 'http://openweathermap.org/img/wn/"+weatherIcon+"@2x.png'></img>";
+            document.querySelector(".temp").innerText = "Tempature (F): " + tempature;
+            document.querySelector(".humid").innerText = "Humidity: " + humidity + "%";
+            document.querySelector(".wind").innerText = "Wind Speed: " + windSpeed;
 
         });
 
