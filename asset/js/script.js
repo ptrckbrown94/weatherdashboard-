@@ -29,7 +29,7 @@ searchbuttonEl.addEventListener("click", function () {
 
 
     const yourKey = "15230fb51b42832a4b1f952cfbe1c3d1";
-    const uvQueryUrl = "api.openweathermap.org/data/2.5/uvi/forecast?lat=37.75&lon=-122.37"
+
     const queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchCityName + "&appid=" + yourKey;
     console.log(queryUrl)
 
@@ -41,26 +41,27 @@ searchbuttonEl.addEventListener("click", function () {
             const humidity = response.data.main.humidity;
             const windSpeed = response.data.wind.speed;
             const cityName = response.data.name;
-            const longitude = response.data.coord.lon;
-            const latitude = response.data.coord.lat;
-            let date = moment().format('LL');
-            console.log(date);
+            const longitude = response.data.coord[0];
+            const latitude = response.data.coord[1];
+            let currentDate = moment().format('LL');
+           console.log(response);
+            const uvQueryUrl = "http://api.openweathermap.org/data/2.5/uvi/forecast?appid=" + yourKey + "&lat=" + latitude + "&lon=" + longitude + "&cnt={cnt}"
 
 
             axios.get(uvQueryUrl)
-                .then(function (response){
+                .then(function (response) {
 
 
                 });
-
+            console.log(response);
 
             // using the above results and generate div with col and row to show current days forcast
-            document.querySelector(".city").innerHTML = cityName + " " + date + "<img src = 'http://openweathermap.org/img/wn/"+weatherIcon+"@2x.png'></img>";
+            document.querySelector(".city").innerHTML = cityName + " " + currentDate + "<img src = 'http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png'></img>";
             document.querySelector(".temp").innerText = "Tempature (F): " + tempature;
             document.querySelector(".humid").innerText = "Humidity: " + humidity + "%";
             document.querySelector(".wind").innerText = "Wind Speed: " + windSpeed;
-            document.querySelector(".UV").innerText = "UV Index: " + ;
-            
+            document.querySelector(".UV").innerText = "UV Index: ";
+
 
         });
 
