@@ -58,7 +58,7 @@ searchbuttonEl.addEventListener("click", function () {
 
                     // using the above results and generate div with col and row to show current days forcast
                     document.querySelector(".city").innerHTML = cityName + " " + currentDate + "<img src = 'http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png'></img>";
-                    document.querySelector(".temp").innerText = "Tempature (F): " + tempature;
+                    document.querySelector(".temp").innerText = "Temperature (F): " + tempature;
                     document.querySelector(".humid").innerText = "Humidity: " + humidity + "%";
                     document.querySelector(".wind").innerText = "Wind Speed: " + windSpeed;
                     document.querySelector(".UV").innerText = "UV Index: " + uvIndex;
@@ -87,9 +87,9 @@ function Get1DayForcastDiv(cityNameString, dayNumber) {
 
 }
  
-const fiveDayQueryUrl = 
+const fiveDayQueryUrl = "api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude;  
 axios.get(fiveDayQueryUrl)
                 .then(function (response){
+                console.log(fiveDayQueryUrl)
 
-                    
                 });
