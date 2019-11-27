@@ -72,8 +72,9 @@ searchbuttonEl.addEventListener("click", function () {
 
                   
                     for (i = 0; i < 5; i++) {
-                        let blueCardDiv = Get1DayForcastDiv(response.data.list, i);
-
+                        let blueCardDiv = Get1DayForcastDiv(response.data.list, i * 8);
+                        const cardContainerEl = document.getElementById("cardContainer")
+                        cardContainerEl.appendChild(blueCardDiv)
                     }
 
 
@@ -96,16 +97,32 @@ function Get1DayForcastDiv(weatherList, index) {
     
     const date1 = weatherList[index].dt_txt;
     const icon1 = weatherList[index].weather[0].icon;
-    const Temperature1 = weatherList[index].main.tempature;
+    const Temperature1 = weatherList[index].main.temp;
     const humidity1 = weatherList[index].main.humidity;
-    date1.appendchild("div")
-    icon1.appendchild(date1)
-    Temperature1.appendchild(icon1)
-    humidity1.appendchild(icon1)
+    
+    const date1Div = document.createElement("div");
+    const icon1Div = document.createElement("div");
+    const Temperature1Div = document.createElement("div");
+    const humidity1Div = document.createElement("div");
+    
+    date1Div.innerText = date1;
+    icon1Div.innerHTML = "<img src = 'http://openweathermap.org/img/wn/" + icon1 + "@2x.png'></img>";
+    Temperature1Div.innerText = "Temperature: " + Temperature1;
+    humidity1Div.innerText = "Humidity: " + humidity1;
 
+
+    blueRootDiv.appendChild(date1Div);
+    blueRootDiv.appendChild(icon1Div);
+    blueRootDiv.appendChild(Temperature1Div);
+    blueRootDiv.appendChild(humidity1Div);
+
+
+
+
+    //"<img src = 'http://openweathermap.org/img/wn/" + icon1 + "@2x.png'></img>"
     //blueRootDiv.appendChild
     //return real div object with data in blue card
     return blueRootDiv;
 
 }
-"<img src = 'http://openweathermap.org/img/wn/" + icon1 + "@2x.png'></img>"
+
