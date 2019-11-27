@@ -64,32 +64,48 @@ searchbuttonEl.addEventListener("click", function () {
                     document.querySelector(".UV").innerText = "UV Index: " + uvIndex;
                 });
 
+
+            const fiveDayQueryUrl = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + yourKey;
+            axios.get(fiveDayQueryUrl)
+                .then(function (response) {
+                    console.log(response)
+
+                  
+                    for (i = 0; i < 5; i++) {
+                        let blueCardDiv = Get1DayForcastDiv(response.data.list, i);
+
+                    }
+
+
+                });
+
         });
 
 
     //now generate 5 day forcast
-    for (i = 0; i < 5; i++) {
-        let blueCardDiv = Get1DayForcastDiv(searchCityName, i);
-
-    }
 
 
 
 
 });
 
-function Get1DayForcastDiv(cityNameString, dayNumber) {
+function Get1DayForcastDiv(weatherList, index) {
     //make api call https://openweathermap.org/forecast5
     const blueRootDiv = document.createElement("div");
+    blueRootDiv.setAttribute("class", "daycolor");
+    
+    const date1 = weatherList[index].dt_txt;
+    const icon1 = weatherList[index].weather[0].icon;
+    const Temperature1 = weatherList[index].main.tempature;
+    const humidity1 = weatherList[index].main.humidity;
+    date1.appendchild("div")
+    icon1.appendchild(date1)
+    Temperature1.appendchild(icon1)
+    humidity1.appendchild(icon1)
+
     //blueRootDiv.appendChild
     //return real div object with data in blue card
     return blueRootDiv;
 
 }
- 
-const fiveDayQueryUrl = "api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude;  
-axios.get(fiveDayQueryUrl)
-                .then(function (response){
-                console.log(fiveDayQueryUrl)
-
-                });
+"<img src = 'http://openweathermap.org/img/wn/" + icon1 + "@2x.png'></img>"
