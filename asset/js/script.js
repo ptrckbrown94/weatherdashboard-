@@ -17,20 +17,65 @@
 
 // two different keys for different  functions
 
+
+const weatherHistory = localStorage.getItem("history");
+let weatherHistoryArray = JSON.parse(weatherHistory);
+
+if (weatherHistoryArray != null) {
+
+    for (i = 0; i < weatherHistoryArray.length; i++) {
+        const newButton = document.createElement("button");
+        newButton.innerText = weatherHistoryArray[i];
+        const historyEl = document.getElementById("historyId")
+        historyEl.appendChild(newButton);
+
+        newButton.addEventListener("click", function () {
+            ProcessSearch(newButton.innerText);
+            console.log("click")
+        });
+    }
+
+}
+
+
 let cityNameEl = document.getElementById("cityName")
 const searchbuttonEl = document.getElementById("searchButton")
 console.log(searchbuttonEl)
 searchbuttonEl.addEventListener("click", function () {
     event.preventDefault();
-    const searchCityName = cityNameEl.value
+    const searchCityName = cityNameEl.value;
     console.log(searchCityName)
+
+
+    ProcessSearch(searchCityName);
+
+
+});
+
+function ProcessSearch(searchText) {
+
+    const newButton = document.createElement("button");
+    newButton.innerText = searchText;
+    const historyEl = document.getElementById("historyId")
+    historyEl.appendChild(newButton);
+
+    if (weatherHistoryArray != null) {
+
+        weatherHistoryArray.push(searchText)
+    } else {
+        weatherHistoryArray = [];
+        weatherHistoryArray.push(searchText)
+    }
+
+
+    localStorage.setItem("history", JSON.stringify(weatherHistoryArray));
     //now read storage shift elements down by one append searchCityName to 0 save results back to local storage
     //generate 5 element table divs based on local storage 
 
 
     const yourKey = "15230fb51b42832a4b1f952cfbe1c3d1";
 
-    const queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchCityName + "&units=imperial&appid=" + yourKey;
+    const queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchText + "&units=imperial&appid=" + yourKey;
     console.log(queryUrl)
 
     axios.get(queryUrl)
@@ -70,7 +115,7 @@ searchbuttonEl.addEventListener("click", function () {
                 .then(function (response) {
                     console.log(response)
 
-                  
+
                     for (i = 0; i < 5; i++) {
                         let blueCardDiv = Get1DayForcastDiv(response.data.list, i * 8);
                         const cardContainerEl = document.getElementById("cardContainer")
@@ -86,25 +131,23 @@ searchbuttonEl.addEventListener("click", function () {
     //now generate 5 day forcast
 
 
-
-
-});
+}
 
 function Get1DayForcastDiv(weatherList, index) {
     //make api call https://openweathermap.org/forecast5
     const blueRootDiv = document.createElement("div");
     blueRootDiv.setAttribute("class", "daycolor");
-    
+
     const date1 = weatherList[index].dt_txt;
     const icon1 = weatherList[index].weather[0].icon;
     const Temperature1 = weatherList[index].main.temp;
     const humidity1 = weatherList[index].main.humidity;
-    
+
     const date1Div = document.createElement("div");
     const icon1Div = document.createElement("div");
     const Temperature1Div = document.createElement("div");
     const humidity1Div = document.createElement("div");
-    
+
     date1Div.innerText = date1;
     icon1Div.innerHTML = "<img src = 'http://openweathermap.org/img/wn/" + icon1 + "@2x.png'></img>";
     Temperature1Div.innerText = "Temperature: " + Temperature1;
