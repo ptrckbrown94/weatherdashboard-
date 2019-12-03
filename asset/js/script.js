@@ -90,7 +90,7 @@ function ProcessSearch(searchText) {
             const latitude = response.data.coord.lat;
             let currentDate = moment().format('LL');
             console.log(response);
-            const uvQueryUrl = "http://api.openweathermap.org/data/2.5/uvi/forecast?appid=" + yourKey + "&lat=" + latitude + "&lon=" + longitude + "&cnt=0"
+            const uvQueryUrl = "https://api.openweathermap.org/data/2.5/uvi/forecast?appid=" + yourKey + "&lat=" + latitude + "&lon=" + longitude + "&cnt=0"
             console.log(uvQueryUrl)
 
             // I had to put this function within the other function because I could not retrieve uvIndex variable
@@ -102,7 +102,7 @@ function ProcessSearch(searchText) {
 
 
                     // using the above results and generate div with col and row to show current days forcast
-                    document.querySelector(".city").innerHTML = cityName + " " + currentDate + "<img src = 'http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png'></img>";
+                    document.querySelector(".city").innerHTML = cityName + " " + currentDate + "<img src = 'https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png'></img>";
                     document.querySelector(".temp").innerText = "Temperature (F): " + tempature;
                     document.querySelector(".humid").innerText = "Humidity: " + humidity + "%";
                     document.querySelector(".wind").innerText = "Wind Speed: " + windSpeed;
@@ -110,7 +110,7 @@ function ProcessSearch(searchText) {
                 });
 
 
-            const fiveDayQueryUrl = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + yourKey;
+            const fiveDayQueryUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + yourKey;
             axios.get(fiveDayQueryUrl)
                 .then(function (response) {
                     console.log(response)
@@ -149,7 +149,7 @@ function Get1DayForcastDiv(weatherList, index) {
     const humidity1Div = document.createElement("div");
 
     date1Div.innerText = date1;
-    icon1Div.innerHTML = "<img src = 'http://openweathermap.org/img/wn/" + icon1 + "@2x.png'></img>";
+    icon1Div.innerHTML = "<img src = 'https://openweathermap.org/img/wn/" + icon1 + "@2x.png'></img>";
     Temperature1Div.innerText = "Temperature: " + Temperature1;
     humidity1Div.innerText = "Humidity: " + humidity1;
 
